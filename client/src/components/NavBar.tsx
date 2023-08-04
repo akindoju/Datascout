@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, SetStateAction } from "react";
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -7,7 +7,7 @@ import {
   SettingsOutlined,
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
-import { FlexBetween } from "../FlexBetween";
+import { FlexBetween } from "./FlexBetween";
 import { useDispatch } from "react-redux";
 import {
   AppBar,
@@ -16,9 +16,14 @@ import {
   Toolbar,
   useTheme,
 } from "@mui/material";
-import { setMode } from "../../redux/slices/globalSlice";
+import { setMode } from "../redux/slices/globalSlice";
 
-export const NavBar: FC = () => {
+interface IProps {
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<SetStateAction<boolean>>;
+}
+
+export const NavBar: FC<IProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -33,7 +38,7 @@ export const NavBar: FC = () => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* LEFT SIDE */}
         <FlexBetween>
-          <IconButton>
+          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
 

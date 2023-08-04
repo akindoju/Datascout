@@ -5,22 +5,20 @@ import { NavBar } from "../../components/NavBar";
 import { Sidebar } from "../../components/Sidebar";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
-  open?: boolean;
-}>(({ theme, open }) => ({
+  open: boolean;
+  isNonMobile: boolean;
+}>(({ theme, open, isNonMobile }) => ({
   flexGrow: 1,
-  padding: theme.spacing(3),
-  transition: theme.transitions.create("margin", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  marginLeft: `-250px`,
-  ...(open && {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  }),
+  transition: open
+    ? theme.transitions.create("margin", {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      })
+    : theme.transitions.create("margin", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+  marginLeft: !isNonMobile || open ? 0 : "-250px",
 }));
 
 export const Layout: FC = () => {
@@ -35,7 +33,8 @@ export const Layout: FC = () => {
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
-      <Main open={isSidebarOpen}>
+
+      <Main open={isSidebarOpen} isNonMobile={isNonMobile}>
         <NavBar
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}

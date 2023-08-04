@@ -121,7 +121,6 @@ export const Sidebar: FC<IProps> = ({
 
   return (
     <Box component={"nav"}>
-      {/* {isSidebarOpen && ( */}
       <Drawer
         open={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
@@ -207,7 +206,6 @@ export const Sidebar: FC<IProps> = ({
           </List>
         </Box>
       </Drawer>
-      {/* )} */}
     </Box>
   );
 };

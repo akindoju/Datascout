@@ -5,11 +5,12 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-
 import clientRoutes from "./routes/client.js";
 import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
+import User from "./models/User.js";
+import { dataUser } from "./data/index.js";
 
 //CONFIG
 dotenv.config();
@@ -37,6 +38,8 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
+
+    User.insertMany(dataUser);
   })
   .catch((err) => {
     console.log({ err });

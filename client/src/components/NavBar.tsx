@@ -16,7 +16,7 @@ import {
   Toolbar,
   useTheme,
 } from "@mui/material";
-import { setMode } from "../redux/slices/globalSlice";
+import { setMode } from "../redux/globalSlice";
 
 interface IProps {
   isSidebarOpen: boolean;

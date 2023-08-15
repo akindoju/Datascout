@@ -30,8 +30,6 @@ export const Layout: FC = () => {
   const userId = useSelector((state: RootState) => state.global.userId);
   const { data } = useGetUserQuery(userId);
 
-  console.log({ data });
-
   return (
     <Box width="100%" height="100%" display={isNonMobile ? "flex" : "block"}>
       <Sidebar

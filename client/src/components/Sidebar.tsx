@@ -22,13 +22,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FlexBetween } from "./FlexBetween";
 import profile from "../assets/profile.webp";
 import { NAV_ITEMS } from "../utils";
+import { IThemeSettings, IUser } from "../interfaces";
 
 interface IProps {
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<SetStateAction<boolean>>;
   isMobileView: boolean;
   drawerWidth: string;
-  user: { name: string; occupation: string };
+  user: IUser;
 }
 
 export const Sidebar: FC<IProps> = ({
@@ -42,7 +43,7 @@ export const Sidebar: FC<IProps> = ({
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const theme = useTheme();
+  const theme: IThemeSettings = useTheme();
 
   const isSidebarLimit = useMediaQuery("(max-width: 1210px)");
 

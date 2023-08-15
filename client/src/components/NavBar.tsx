@@ -17,15 +17,21 @@ import {
   useTheme,
 } from "@mui/material";
 import { setMode } from "../redux";
+import { IThemeSettings, IUser } from "../interfaces";
 
 interface IProps {
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<SetStateAction<boolean>>;
+  user: IUser;
 }
 
-export const NavBar: FC<IProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
+export const NavBar: FC<IProps> = ({
+  isSidebarOpen,
+  setIsSidebarOpen,
+  user,
+}) => {
   const dispatch = useDispatch();
-  const theme = useTheme();
+  const theme: IThemeSettings = useTheme();
 
   return (
     <AppBar

@@ -1,3 +1,5 @@
+import { IThemeSettings } from "./interfaces";
+
 interface TokenColors {
   [key: number]: string;
 }
@@ -6,52 +8,6 @@ interface TokensDark {
   grey: TokenColors;
   primary: TokenColors;
   secondary: TokenColors;
-}
-
-interface PaletteSettings {
-  main: string;
-  light?: string;
-}
-
-interface ThemeSettings {
-  palette: {
-    mode: "dark" | "light";
-    primary: PaletteSettings;
-    secondary: PaletteSettings;
-    neutral: PaletteSettings;
-    background: {
-      default: string;
-      alt: string;
-    };
-  };
-  typography: {
-    fontFamily: string;
-    fontSize: number;
-    h1: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h2: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h3: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h4: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h5: {
-      fontFamily: string;
-      fontSize: number;
-    };
-    h6: {
-      fontFamily: string;
-      fontSize: number;
-    };
-  };
 }
 
 // color design tokens export from Tailwind Shades
@@ -121,7 +77,7 @@ const reverseTokens = (tokensDark: TokensDark) => {
 export const tokensLight = reverseTokens(tokensDark);
 
 // mui theme settings
-export const themeSettings = (mode: "dark" | "light"): ThemeSettings => {
+export const themeSettings = (mode: "dark" | "light"): IThemeSettings => {
   return {
     palette: {
       mode,
@@ -142,8 +98,8 @@ export const themeSettings = (mode: "dark" | "light"): ThemeSettings => {
               main: tokensDark.grey[500],
             },
             background: {
-              default: tokensDark.primary[600],
-              alt: tokensDark.primary[500],
+              default: tokensDark.primary[800],
+              alt: tokensDark.primary[700],
             },
           }
         : {

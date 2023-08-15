@@ -9,8 +9,8 @@ import { useGetUserQuery } from "../../redux/api";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open: boolean;
-  isNonMobile: boolean;
-}>(({ theme, open, isNonMobile }) => ({
+  isMobileView: boolean;
+}>(({ theme, open, isMobileView }) => ({
   flexGrow: 1,
   transition: open
     ? theme.transitions.create("margin", {
@@ -21,28 +21,30 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-  marginLeft: !isNonMobile || open ? 0 : "-250px",
+  marginLeft: isMobileView || open ? 0 : "-250px",
 }));
 
 export const Layout: FC = () => {
-  const isNonMobile = useMediaQuery("(min-width: 600px)");
+  const isMobileView = useMediaQuery("(max-width: 600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const userId = useSelector((state: RootState) => state.global.userId);
   const { data } = useGetUserQuery(userId);
 
   return (
-    <Box width="100%" height="100%" display={isNonMobile ? "flex" : "block"}>
+    <Box width="100%" height="100%" display={isMobileView ? "block" : "flex"}>
       <Sidebar
         drawerWidth="250px"
-        isNonMobile={isNonMobile}
+        isMobileView={isMobileView}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
+        user={data || {}}
       />
 
-      <Main open={isSidebarOpen} isNonMobile={isNonMobile}>
+      <Main open={isSidebarOpen} isMobileView={isMobileView}>
         <NavBar
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
+          user={data || {}}
         />
         <Outlet />
       </Main>

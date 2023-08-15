@@ -10,110 +10,41 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import {
   SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
-  HomeOutlined,
-  ShoppingCartOutlined,
-  Groups2Outlined,
-  ReceiptLongOutlined,
-  PublicOutlined,
-  PointOfSaleOutlined,
-  TodayOutlined,
-  CalendarMonthOutlined,
-  AdminPanelSettingsOutlined,
-  TrendingUpOutlined,
-  PieChartOutlined,
 } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlexBetween } from "./FlexBetween";
-import profile from "../../assets/profile.webp";
+import profile from "../assets/profile.webp";
+import { NAV_ITEMS } from "../utils";
 
 interface IProps {
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<SetStateAction<boolean>>;
-  isNonMobile: boolean;
+  isMobileView: boolean;
   drawerWidth: string;
+  user: { name: string; occupation: string };
 }
-
-interface NavItem {
-  text: string;
-  icon: JSX.Element | null;
-}
-
-const navItems: NavItem[] = [
-  {
-    text: "Dashboard",
-    icon: <HomeOutlined />,
-  },
-  {
-    text: "Client Facing",
-    icon: null,
-  },
-  {
-    text: "Products",
-    icon: <ShoppingCartOutlined />,
-  },
-  {
-    text: "Customers",
-    icon: <Groups2Outlined />,
-  },
-  {
-    text: "Transactions",
-    icon: <ReceiptLongOutlined />,
-  },
-  {
-    text: "Geography",
-    icon: <PublicOutlined />,
-  },
-  {
-    text: "Sales",
-    icon: null,
-  },
-  {
-    text: "Overview",
-    icon: <PointOfSaleOutlined />,
-  },
-  {
-    text: "Daily",
-    icon: <TodayOutlined />,
-  },
-  {
-    text: "Monthly",
-    icon: <CalendarMonthOutlined />,
-  },
-  {
-    text: "Breakdown",
-    icon: <PieChartOutlined />,
-  },
-  {
-    text: "Management",
-    icon: null,
-  },
-  {
-    text: "Admin",
-    icon: <AdminPanelSettingsOutlined />,
-  },
-  {
-    text: "Performance",
-    icon: <TrendingUpOutlined />,
-  },
-];
 
 export const Sidebar: FC<IProps> = ({
   isSidebarOpen,
   setIsSidebarOpen,
-  isNonMobile,
+  isMobileView,
   drawerWidth,
+  user,
 }) => {
+  const [active, setActive] = useState<string>("");
+
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const theme = useTheme();
 
-  const [active, setActive] = useState<string>("");
+  const isSidebarLimit = useMediaQuery("(max-width: 1210px)");
 
   useEffect(() => {
     setActive(pathname.substring(1));
@@ -128,12 +59,14 @@ export const Sidebar: FC<IProps> = ({
         anchor="left"
         sx={{
           width: drawerWidth,
+          display: "flex",
+          flexDirection: "column",
 
           "& .MuiDrawer-paper": {
             color: theme.palette.secondary[200],
             backgroundColor: theme.palette.background.alt,
             boxSizing: "border-box",
-            borderWidth: isNonMobile ? 0 : "2px",
+            borderWidth: isMobileView ? "2px" : 0,
             width: drawerWidth,
           },
         }}
@@ -146,7 +79,7 @@ export const Sidebar: FC<IProps> = ({
                   DataScout
                 </Typography>
               </Box>
-              {!isNonMobile && (
+              {isMobileView && (
                 <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                   <ChevronLeft />
                 </IconButton>
@@ -154,56 +87,110 @@ export const Sidebar: FC<IProps> = ({
             </FlexBetween>
           </Box>
 
-          <List>
-            {navItems.map(({ text, icon }: NavItem) => {
-              if (!icon) {
-                return (
-                  <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
-                    {text}
-                  </Typography>
-                );
-              }
-
-              const lcText = text.toLowerCase();
-
-              return (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton
-                    onClick={() => {
-                      navigate(`/${lcText}`);
-                      setActive(lcText);
-                    }}
-                    sx={{
-                      bgcolor:
-                        active === lcText
-                          ? theme.palette.secondary[300]
-                          : "transparent",
-                      color:
-                        active === lcText
-                          ? theme.palette.primary[600]
-                          : theme.palette.secondary[100],
-                    }}
-                  >
-                    <ListItemIcon
+          <Box
+            sx={{
+              maxHeight: isSidebarLimit ? "500px" : "1000px",
+              height: "100%",
+              overflow: "scroll",
+            }}
+          >
+            <List>
+              {NAV_ITEMS.map(({ text, icon }) => {
+                if (!icon) {
+                  return (
+                    <Typography
+                      key={text}
                       sx={{
-                        ml: "2rem",
+                        m: ".6rem 0 0.2rem 3rem",
+                        color: theme.palette.secondary[300],
+                        fontSize: "12px",
+                      }}
+                    >
+                      {text}
+                    </Typography>
+                  );
+                }
+
+                const lcText = text.toLowerCase();
+
+                return (
+                  <ListItem key={text} disablePadding>
+                    <ListItemButton
+                      onClick={() => {
+                        navigate(`/${lcText}`);
+                        setActive(lcText);
+                      }}
+                      sx={{
+                        bgcolor:
+                          active === lcText
+                            ? theme.palette.secondary[300]
+                            : "transparent",
                         color:
                           active === lcText
                             ? theme.palette.primary[600]
-                            : theme.palette.secondary[200],
+                            : theme.palette.secondary[100],
                       }}
                     >
-                      {icon}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                    {active === lcText && (
-                      <ChevronRightOutlined sx={{ ml: "auto" }} />
-                    )}
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
+                      <ListItemIcon
+                        sx={{
+                          ml: "2rem",
+                          color:
+                            active === lcText
+                              ? theme.palette.primary[600]
+                              : theme.palette.secondary[200],
+                        }}
+                      >
+                        {icon}
+                      </ListItemIcon>
+                      <ListItemText primary={text} />
+                      {active === lcText && (
+                        <ChevronRightOutlined sx={{ ml: "auto" }} />
+                      )}
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Box>
+        </Box>
+
+        <Box position={"absolute"} bottom={0}>
+          <Divider />
+          <FlexBetween
+            textTransform={"none"}
+            gap={"1rem"}
+            m={"1.5rem 2rem 1.5rem 3rem"}
+          >
+            <Box
+              component={"img"}
+              alt="profile"
+              src={profile}
+              height={"40px"}
+              width={"40px"}
+              borderRadius={"20px"}
+              sx={{ objectFit: "cover" }}
+            />
+            <Box textAlign={"left"}>
+              <Typography
+                fontWeight={"bold"}
+                fontSize={"0.9rem"}
+                sx={{ color: theme.palette.secondary[100] }}
+              >
+                {user.name}
+              </Typography>
+
+              <Typography
+                fontSize={"0.8rem"}
+                sx={{ color: theme.palette.secondary[200] }}
+              >
+                {user.occupation}
+              </Typography>
+            </Box>
+
+            <SettingsOutlined
+              sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
+            />
+          </FlexBetween>
         </Box>
       </Drawer>
     </Box>

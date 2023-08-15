@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { globalSlice } from "./globalSlice";
+import { globalSlice } from ".";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { api } from "./api";
 

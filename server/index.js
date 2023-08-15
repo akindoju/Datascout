@@ -23,14 +23,15 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//ROUTES
-app.use("client", clientRoutes);
-app.use("general", generalRoutes);
-app.use("management", managementRoutes);
-app.use("sales", salesRoutes);
+// ROUTES
+app.use("/client", clientRoutes);
+app.use("/general", generalRoutes);
+app.use("/management", managementRoutes);
+app.use("/sales", salesRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
+
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -39,8 +40,7 @@ mongoose
   .then(() => {
     app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 
-    User.insertMany(dataUser);
+    //To manually add users to database one, comment out after use
+    // User.insertMany(dataUser);
   })
-  .catch((err) => {
-    console.log({ err });
-  });
+  .catch((error) => console.log(`${error} did not connect`));

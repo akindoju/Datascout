@@ -64,7 +64,6 @@ export const Sidebar: FC<IProps> = ({
           flexDirection: "column",
 
           "& .MuiDrawer-paper": {
-            color: theme.palette.secondary[200],
             backgroundColor: theme.palette.background.alt,
             boxSizing: "border-box",
             borderWidth: isMobileView ? "2px" : 0,
@@ -103,7 +102,7 @@ export const Sidebar: FC<IProps> = ({
                       key={text}
                       sx={{
                         m: ".6rem 0 0.2rem 3rem",
-                        color: theme.palette.secondary[300],
+                        color: theme.palette.secondary[500],
                         fontSize: "12px",
                       }}
                     >
@@ -124,26 +123,33 @@ export const Sidebar: FC<IProps> = ({
                       sx={{
                         bgcolor:
                           active === lcText
+                            ? theme.palette.secondary[0.5]
+                            : "transparent",
+                        borderLeft: "3px solid transparent",
+                        borderLeftColor:
+                          active === lcText
                             ? theme.palette.secondary[300]
                             : "transparent",
-                        color:
-                          active === lcText
-                            ? theme.palette.primary[600]
-                            : theme.palette.secondary[100],
+                        color: theme.palette.secondary[100],
                       }}
                     >
                       <ListItemIcon
                         sx={{
                           ml: "2rem",
-                          color:
-                            active === lcText
-                              ? theme.palette.primary[600]
-                              : theme.palette.secondary[200],
+                          color: theme.palette.secondary[100],
                         }}
                       >
                         {icon}
                       </ListItemIcon>
-                      <ListItemText primary={text} />
+
+                      <ListItemText
+                        primary={text}
+                        sx={{
+                          "& .MuiListItemText-primary": {
+                            fontWeight: active === lcText ? 500 : 400,
+                          },
+                        }}
+                      />
                       {active === lcText && (
                         <ChevronRightOutlined sx={{ ml: "auto" }} />
                       )}

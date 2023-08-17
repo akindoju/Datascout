@@ -34,23 +34,23 @@ export const tokensDark: TokensDark = {
     300: "#7a7f9d",
     400: "#4d547d",
     500: "#21295c",
-    600: "#191F45", // manually adjusted
-    700: "#141937",
-    800: "#0d1025",
-    900: "#070812",
+    600: "#191F45", // Manually adjusted
+    700: "#101624", // Manually adjusted
+    800: "#0D1025",
+    900: "#0B101A", //Manually adjusted
   },
   secondary: {
-    // yellow
-    50: "#f0f0f0", // manually adjusted
-    100: "#fff6e0",
-    200: "#ffedc2",
-    300: "#ffe3a3",
-    400: "#ffda85",
-    500: "#ffd166",
-    600: "#cca752",
-    700: "#997d3d",
-    800: "#665429",
-    900: "#332a14",
+    50: "#E4F7F8",
+    100: "#CCEEF2",
+    200: "#9CD7E5",
+    300: "#248cd6", //Manually adjusted
+    400: "#3B94CB",
+    500: "#2A669F",
+    600: "#234B83",
+    700: "#1B3366",
+    800: "#14204A",
+    900: "#0C102E",
+    0.5: "rgba(36, 140, 214, 0.25)", //Reduced Opacity, manually added
   },
 };
 
@@ -98,7 +98,7 @@ export const themeSettings = (mode: "dark" | "light"): IThemeSettings => {
               main: tokensDark.grey[500],
             },
             background: {
-              default: tokensDark.primary[800],
+              default: tokensDark.primary[900],
               alt: tokensDark.primary[700],
             },
           }
@@ -125,30 +125,30 @@ export const themeSettings = (mode: "dark" | "light"): IThemeSettings => {
           }),
     },
     typography: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
+      fontFamily: ["Poppins", "sans-serif"].join(","),
       fontSize: 12,
       h1: {
-        fontFamily: ["Inter", "sans-serif"].join(","),
+        fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 40,
       },
       h2: {
-        fontFamily: ["Inter", "sans-serif"].join(","),
+        fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 32,
       },
       h3: {
-        fontFamily: ["Inter", "sans-serif"].join(","),
+        fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 24,
       },
       h4: {
-        fontFamily: ["Inter", "sans-serif"].join(","),
+        fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 20,
       },
       h5: {
-        fontFamily: ["Inter", "sans-serif"].join(","),
+        fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 16,
       },
       h6: {
-        fontFamily: ["Inter", "sans-serif"].join(","),
+        fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 14,
       },
     },

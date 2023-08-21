@@ -1,7 +1,6 @@
 import { FC, SetStateAction, useState, useEffect } from "react";
 import {
   Box,
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -20,7 +19,7 @@ import {
 } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlexBetween } from "./FlexBetween";
-import profile from "../assets/profile.webp";
+import profile from "../assets/profile.png";
 import { NAV_ITEMS } from "../utils";
 import { IThemeSettings, IUser } from "../interfaces";
 
@@ -130,13 +129,19 @@ export const Sidebar: FC<IProps> = ({
                           active === lcText
                             ? theme.palette.secondary[300]
                             : "transparent",
-                        color: theme.palette.secondary[100],
+                        color:
+                          active === lcText
+                            ? theme.palette.secondary[300]
+                            : theme.palette.secondary[100],
                       }}
                     >
                       <ListItemIcon
                         sx={{
                           ml: "2rem",
-                          color: theme.palette.secondary[100],
+                          color:
+                            active === lcText
+                              ? theme.palette.secondary[300]
+                              : theme.palette.secondary[100],
                         }}
                       >
                         {icon}
@@ -161,27 +166,37 @@ export const Sidebar: FC<IProps> = ({
           </Box>
         </Box>
 
-        <Box position={"absolute"} bottom={0}>
-          <Divider />
-          <FlexBetween
-            textTransform={"none"}
-            gap={"1rem"}
-            m={"1.5rem 2rem 1.5rem 3rem"}
-          >
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            borderTop: `1px solid ${theme.palette.action.border}`,
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            padding: "1.5rem 1rem",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <Box
               component={"img"}
               alt="profile"
               src={profile}
-              height={"40px"}
-              width={"40px"}
-              borderRadius={"20px"}
-              sx={{ objectFit: "cover" }}
+              sx={{
+                objectFit: "cover",
+                marginRight: "12px",
+                height: "40px",
+                width: "40px",
+                borderRadius: "20px",
+              }}
             />
+
             <Box textAlign={"left"}>
               <Typography
                 fontWeight={"bold"}
                 fontSize={"0.9rem"}
-                sx={{ color: theme.palette.secondary[100] }}
+                sx={{ color: theme.palette.secondary[300] }}
               >
                 {user.name}
               </Typography>
@@ -193,11 +208,13 @@ export const Sidebar: FC<IProps> = ({
                 {user.occupation}
               </Typography>
             </Box>
+          </Box>
 
+          <IconButton>
             <SettingsOutlined
               sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
             />
-          </FlexBetween>
+          </IconButton>
         </Box>
       </Drawer>
     </Box>

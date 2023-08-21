@@ -8,6 +8,7 @@ interface TokensDark {
   grey: TokenColors;
   primary: TokenColors;
   secondary: TokenColors;
+  action: { border: string };
 }
 
 // color design tokens export from Tailwind Shades
@@ -52,6 +53,7 @@ export const tokensDark: TokensDark = {
     900: "#0C102E",
     0.5: "rgba(36, 140, 214, 0.25)", //Reduced Opacity, manually added
   },
+  action: { border: "rgba(255, 255, 255, 0.08)" },
 };
 
 // function that reverses the color palette
@@ -101,6 +103,9 @@ export const themeSettings = (mode: "dark" | "light"): IThemeSettings => {
               default: tokensDark.primary[900],
               alt: tokensDark.primary[700],
             },
+            action: {
+              ...tokensDark.action,
+            },
           }
         : {
             // palette values for light mode
@@ -121,6 +126,9 @@ export const themeSettings = (mode: "dark" | "light"): IThemeSettings => {
             background: {
               default: tokensDark.grey[0],
               alt: tokensDark.grey[50],
+            },
+            action: {
+              ...tokensDark.action,
             },
           }),
     },

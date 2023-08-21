@@ -5,7 +5,6 @@ import {
   Menu as MenuIcon,
   Search,
   SettingsOutlined,
-  ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import { FlexBetween } from "./FlexBetween";
 import { useDispatch } from "react-redux";
@@ -25,11 +24,7 @@ interface IProps {
   user: IUser;
 }
 
-export const NavBar: FC<IProps> = ({
-  isSidebarOpen,
-  setIsSidebarOpen,
-  user,
-}) => {
+export const NavBar: FC<IProps> = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme: IThemeSettings = useTheme();
 

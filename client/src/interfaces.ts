@@ -27,6 +27,7 @@ export interface IThemeSettings {
     primary: PaletteSettings;
     secondary: PaletteSettings;
     neutral: PaletteSettings;
+    action: { border: string };
     background: {
       default: string;
       alt: string;

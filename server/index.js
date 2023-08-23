@@ -9,8 +9,10 @@ import clientRoutes from "./routes/client.js";
 import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
+import Products from "./models/Products.js";
+import ProductsStat from "./models/ProductsStat.js";
 import User from "./models/User.js";
-import { dataUser } from "./data/index.js";
+import { dataUser, dataProduct, dataProductStat } from "./data/index.js";
 
 //CONFIG
 dotenv.config();
@@ -41,6 +43,8 @@ mongoose
     app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 
     //To manually add users to database one, comment out after use
+    Products.insertMany(dataProduct);
+    ProductsStat.insertMany(dataProductStat);
     // User.insertMany(dataUser);
   })
   .catch((error) => console.log(`${error} did not connect`));

@@ -39,11 +39,13 @@ export const NavBar: FC<IProps> = ({
   const dispatch = useDispatch();
   const theme: IThemeSettings = useTheme();
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
 
-  const handleClick = (event: { currentTarget: SetStateAction<null> }) =>
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
+  };
+
   const handleClose = () => setAnchorEl(null);
 
   return (

@@ -42,9 +42,9 @@ mongoose
   .then(() => {
     app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 
-    //To manually add users to database one, comment out after use
-    Products.insertMany(dataProduct);
-    ProductsStat.insertMany(dataProductStat);
+    //Manually add users to database one, comment out after use
+    // Products.insertMany(dataProduct);
+    // ProductsStat.insertMany(dataProductStat);
     // User.insertMany(dataUser);
   })
   .catch((error) => console.log(`${error} did not connect`));

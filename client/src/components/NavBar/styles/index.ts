@@ -3,6 +3,7 @@ export const navStyles = {
     position: "static",
     background: "none",
     boxShadow: "none",
+    p: "0 1rem",
   },
   searchBar: {
     borderRadius: "9px",

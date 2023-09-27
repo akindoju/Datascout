@@ -51,12 +51,17 @@ export const NavBar: FC<IProps> = ({
 
   return (
     <AppBar sx={navStyles.appBar}>
-      <Toolbar sx={{ justifyContent: "space-between" }}>
+      <Toolbar
+        sx={{
+          justifyContent: "space-between",
+        }}
+        disableGutters
+      >
         {/* LEFT SIDE */}
         <FlexBetween>
           <IconButton
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            sx={{ marginRight: "24px" }}
+            sx={{ marginRight: "1.5rem" }}
           >
             <MenuIcon />
           </IconButton>

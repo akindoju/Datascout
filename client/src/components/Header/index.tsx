@@ -13,15 +13,18 @@ const Header: FC<IProps> = ({ title, subtitle }) => {
   return (
     <Box>
       <Typography
-        variant="h3"
         color={theme.palette.secondary[300]}
         fontWeight="bold"
-        sx={{ mb: "5px" }}
+        fontSize={"25px"}
       >
         {title}
       </Typography>
 
-      <Typography variant="h6" color={theme.palette.secondary[200]}>
+      <Typography
+        variant="h6"
+        color={theme.palette.secondary[200]}
+        fontSize={"12px"}
+      >
         {subtitle}
       </Typography>
     </Box>

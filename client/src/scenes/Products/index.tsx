@@ -14,6 +14,7 @@ import {
 import Header from "../../components/Header";
 import { useGetProductsQuery } from "../../redux/api";
 import { IThemeSettings } from "../../interfaces";
+import { productsStyles } from "./styles";
 
 interface IProps {
   _id: string;
@@ -45,25 +46,28 @@ const Product: FC<IProps> = ({
   return (
     <Card
       sx={{
-        backgroundImage: "none",
+        ...productsStyles.card,
         backgroundColor: theme.palette.background.alt,
-        borderRadius: "0.55rem",
       }}
     >
       <CardContent>
         <Typography
-          sx={{ fontSize: 14 }}
-          color={theme.palette.secondary[700]}
+          color={theme.palette.secondary[200]}
           gutterBottom
+          fontSize={14}
         >
-          {category}
+          {category[0].toUpperCase() + category.substring(1)}
         </Typography>
 
-        <Typography variant="h5" component="div">
+        <Typography
+          variant="h5"
+          component="div"
+          color={theme.palette.secondary[300]}
+        >
           {name}
         </Typography>
 
-        <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
+        <Typography sx={{ mb: "1.5rem" }}>
           ${Number(price).toFixed(2)}
         </Typography>
 
@@ -74,7 +78,8 @@ const Product: FC<IProps> = ({
 
       <CardActions>
         <Button
-          // color="primary"
+          sx={{ color: theme.palette.secondary[300] }}
+          variant="outlined"
           size="small"
           onClick={() => setIsExpanded(!isExpanded)}
         >
@@ -91,12 +96,12 @@ const Product: FC<IProps> = ({
         }}
       >
         <CardContent>
-          <Typography>id: {_id}</Typography>
-          <Typography>Supply Left: {supply}</Typography>
-          <Typography>
+          <Typography variant="body2">id: {_id}</Typography>
+          <Typography variant="body2">Supply Left: {supply}</Typography>
+          <Typography variant="body2">
             Yearly Sales This Year: {stat.yearlySalesTotal}
           </Typography>
-          <Typography>
+          <Typography variant="body2">
             Yearly Units Sold This Year: {stat.yearlyTotalSoldUnits}
           </Typography>
         </CardContent>
@@ -113,8 +118,8 @@ const Products: FC = () => {
       <Header title="PRODUCTS" subtitle="See your list of products." />
 
       {data || !isLoading ? (
-        <Grid container spacing={2} mt={"20px"}>
-          {data.map(
+        <Grid container spacing={2} mt={"20px"} sx={{ paddingBottom: 2 }}>
+          {data?.map(
             ({
               _id,
               name,
@@ -142,7 +147,7 @@ const Products: FC = () => {
           )}
         </Grid>
       ) : (
-        <>Loading...</>
+        <Typography sx={{ mt: "20px" }}>Loading...</Typography>
       )}
     </Box>
   );

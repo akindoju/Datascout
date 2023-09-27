@@ -24,7 +24,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   marginLeft: isMobileView || open ? 0 : "-250px",
 }));
 
-export const Layout: FC = () => {
+const Layout: FC = () => {
   const isMobileView = useMediaQuery("(max-width: 600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const userId = useSelector((state: RootState) => state.global.userId);
@@ -51,3 +51,5 @@ export const Layout: FC = () => {
     </Box>
   );
 };
+
+export default Layout;

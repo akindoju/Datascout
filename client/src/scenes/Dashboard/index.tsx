@@ -1,5 +1,7 @@
 import { FC } from "react";
 
-export const Dashboard: FC = () => {
+const Dashboard: FC = () => {
   return <div>Layout</div>;
 };
+
+export default Dashboard;

@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { useMemo } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { Dashboard } from "./scenes/Dashboard";
-import { Layout } from "./scenes/Layout";
+import Dashboard from "./scenes/Dashboard";
+import Layout from "./scenes/Layout";
+import Products from "./scenes/Products";
 
 function App() {
   const mode = useSelector((state: RootState) => state.global.mode);

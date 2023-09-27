@@ -18,10 +18,11 @@ import {
   ChevronRightOutlined,
 } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FlexBetween } from "./FlexBetween";
-import profile from "../assets/profile.png";
-import { NAV_ITEMS } from "../utils";
-import { IThemeSettings, IUser } from "../interfaces";
+import { FlexBetween } from "../FlexBetween";
+import profile from "../../assets/profile.png";
+import { NAV_ITEMS } from "../../utils";
+import { IThemeSettings, IUser } from "../../interfaces";
+import { sidebarStyles } from "./styles";
 
 interface IProps {
   isSidebarOpen: boolean;
@@ -88,9 +89,8 @@ export const Sidebar: FC<IProps> = ({
 
           <Box
             sx={{
+              ...sidebarStyles.listWrapper,
               maxHeight: isSidebarLimit ? "500px" : "1000px",
-              height: "100%",
-              overflow: "scroll",
             }}
           >
             <List>
@@ -100,9 +100,8 @@ export const Sidebar: FC<IProps> = ({
                     <Typography
                       key={text}
                       sx={{
-                        m: ".6rem 0 0.2rem 3rem",
+                        ...sidebarStyles.list,
                         color: theme.palette.secondary[500],
-                        fontSize: "12px",
                       }}
                     >
                       {text}
@@ -168,14 +167,8 @@ export const Sidebar: FC<IProps> = ({
 
         <Box
           sx={{
-            position: "absolute",
-            bottom: 0,
+            ...sidebarStyles.footer,
             borderTop: `1px solid ${theme.palette.action.border}`,
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            padding: "1.5rem 1rem",
-            justifyContent: "space-between",
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -183,13 +176,7 @@ export const Sidebar: FC<IProps> = ({
               component={"img"}
               alt="profile"
               src={profile}
-              sx={{
-                objectFit: "cover",
-                marginRight: "12px",
-                height: "40px",
-                width: "40px",
-                borderRadius: "20px",
-              }}
+              sx={sidebarStyles.profileImg}
             />
 
             <Box textAlign={"left"}>

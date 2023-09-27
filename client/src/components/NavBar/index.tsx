@@ -7,7 +7,7 @@ import {
   SettingsOutlined,
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
-import { FlexBetween } from "./FlexBetween";
+import { FlexBetween } from "../FlexBetween";
 import { useDispatch } from "react-redux";
 import {
   AppBar,
@@ -21,9 +21,10 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import { setMode } from "../redux";
-import { IThemeSettings, IUser } from "../interfaces";
-import profile from "../assets/profile.png";
+import { setMode } from "../../redux";
+import { IThemeSettings, IUser } from "../../interfaces";
+import profile from "../../assets/profile.png";
+import { navStyles } from "./styles";
 
 interface IProps {
   isSidebarOpen: boolean;
@@ -49,25 +50,22 @@ export const NavBar: FC<IProps> = ({
   const handleClose = () => setAnchorEl(null);
 
   return (
-    <AppBar
-      sx={{
-        position: "static",
-        background: "none",
-        boxShadow: "none",
-      }}
-    >
+    <AppBar sx={navStyles.appBar}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* LEFT SIDE */}
         <FlexBetween>
-          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          <IconButton
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            sx={{ marginRight: "24px" }}
+          >
             <MenuIcon />
           </IconButton>
 
           <FlexBetween
-            bgcolor={theme.palette.background.alt}
-            borderRadius={"9px"}
-            gap={"3rem"}
-            p={"0.1rem 1.5rem"}
+            sx={{
+              ...navStyles.searchBar,
+              bgcolor: theme.palette.background.alt,
+            }}
           >
             <InputBase placeholder="Search..." />
             <IconButton>
@@ -90,27 +88,12 @@ export const NavBar: FC<IProps> = ({
           </IconButton>
 
           <FlexBetween>
-            <Button
-              onClick={handleClick}
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                textTransform: "none",
-                gap: "1rem",
-              }}
-            >
+            <Button onClick={handleClick} sx={navStyles.dropdown}>
               <Box
                 component={"img"}
                 alt="profile"
                 src={profile}
-                sx={{
-                  objectFit: "cover",
-                  marginRight: "12px",
-                  height: "32px",
-                  width: "32px",
-                  borderRadius: "50%",
-                }}
+                sx={navStyles.profileImg}
               />
 
               <Box textAlign={"left"}>
@@ -133,6 +116,7 @@ export const NavBar: FC<IProps> = ({
                 sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
               />
             </Button>
+
             <Menu
               open={isOpen}
               anchorEl={anchorEl}

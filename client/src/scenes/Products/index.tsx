@@ -114,8 +114,8 @@ const Products: FC = () => {
   const { data, isLoading } = useGetProductsQuery();
 
   return (
-    <Box m="0.8rem 1.5rem">
-      <Header title="PRODUCTS" subtitle="See your list of products." />
+    <Box>
+      <Header title="PRODUCTS" subtitle="See your list of products" />
 
       {data || !isLoading ? (
         <Grid container spacing={2} mt={"20px"} sx={{ paddingBottom: 2 }}>

@@ -1,4 +1,4 @@
-import Product from "../models/Products.js";
+import Product from "../models/Product.js";
 import ProductStat from "../models/ProductsStat.js";
 import User from "../models/User.js";
 
@@ -32,4 +32,9 @@ export const getCustomers = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+export const getTransactions = async (req, res) => {
+  try {
+  } catch (error) {}
 };

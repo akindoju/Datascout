@@ -2,21 +2,14 @@ import { Box, useTheme } from "@mui/material";
 import { FC } from "react";
 import Header from "../../components/Header";
 import { useGetCustomersQuery } from "../../redux/api";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { IThemeSettings } from "../../interfaces";
-
-interface IColumns {
-  field: string;
-  headerName: string;
-  flex: number;
-  renderCell?: (params: { value: string }) => React.ReactNode;
-}
 
 const Customers: FC = () => {
   const theme: IThemeSettings = useTheme();
   const { data, isLoading } = useGetCustomersQuery();
 
-  const columns: IColumns[] = [
+  const columns: GridColDef[] = [
     {
       field: "_id",
       headerName: "ID",
@@ -36,7 +29,7 @@ const Customers: FC = () => {
       field: "phoneNumber",
       headerName: "Phone Number",
       flex: 0.5,
-      renderCell: (params: { value: string }) => {
+      renderCell: (params) => {
         return params.value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
       },
     },
@@ -61,7 +54,34 @@ const Customers: FC = () => {
     <Box>
       <Header title="CUSTOMERS" subtitle="List of Customers" />
 
-      <Box mt={"40px"}>
+      <Box
+        mt={"40px"}
+        height={"75vh"}
+        borderRadius={"4px"}
+        border={`2px solid ${theme.palette.background.alt}`}
+        sx={{
+          "& .MuiDataGrid-root": {
+            border: "none",
+          },
+          "& .MuiDataGrid-cell": {
+            borderColor: theme.palette.background.alt,
+            borderBottomWidth: "2px",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[100],
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-footerContainer": {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[100],
+            borderTop: "none",
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${theme.palette.secondary[200]} !important`,
+          },
+        }}
+      >
         <DataGrid
           rows={data || []}
           columns={columns}

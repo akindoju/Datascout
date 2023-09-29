@@ -6,7 +6,6 @@ import { Sidebar } from "../../components/Sidebar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useGetUserQuery } from "../../redux/api";
-import Header from "../../components/Header";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open: boolean;

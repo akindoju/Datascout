@@ -41,7 +41,7 @@ const Product: FC<IProps> = ({
   stat,
 }) => {
   const theme: IThemeSettings = useTheme();
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   return (
     <Card

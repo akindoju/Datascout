@@ -89,10 +89,10 @@ const Customers: FC = () => {
           getRowId={(row: { _id: string }) => row._id}
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 25 },
+              paginationModel: { page: 0, pageSize: 20 },
             },
           }}
-          pageSizeOptions={[5, 10, 15, 25, 50, 100]}
+          pageSizeOptions={[20, 50, 100]}
         />
       </Box>
     </Box>

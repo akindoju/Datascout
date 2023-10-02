@@ -10,14 +10,15 @@ const Transactions = () => {
   const theme: IThemeSettings = useTheme();
 
   const [page, setPage] = useState<number>(0);
-  const [pageSize, setPageSize] = useState<number>(25);
+  const [pageSize, setPageSize] = useState<number>(20);
   const [sort, setSort] = useState<GridSortModel>([
     {
-      field: "",
+      field: "userId",
       sort: "desc",
     },
   ]);
   const [search, setSearch] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>("");
 
   const { data, isLoading } = useGetTransactionsQuery({
     page,
@@ -108,6 +109,8 @@ const Transactions = () => {
           sortingMode="server"
           onSortModelChange={(newSortModel) => setSort(newSortModel)}
           slots={{ toolbar: DataGridCustomToolbar }}
+          slotProps={{ toolbar: { setSearch, setSearchInput, searchInput } }}
+          pageSizeOptions={[20, 50, 100]}
           paginationModel={{
             pageSize,
             page,

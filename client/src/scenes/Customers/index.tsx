@@ -69,7 +69,7 @@ const Customers: FC = () => {
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
+            color: theme.palette.secondary[300],
             borderBottom: "none",
           },
           "& .MuiDataGrid-footerContainer": {

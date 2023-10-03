@@ -13,11 +13,13 @@ import Product from "./models/Product.js";
 import Transaction from "./models/Transaction.js";
 import ProductsStat from "./models/ProductsStat.js";
 import User from "./models/User.js";
+import OverallStat from "./models/OverallStats.js";
 import {
   dataUser,
   dataProduct,
   dataProductStat,
   dataTransaction,
+  dataOverallStat,
 } from "./data/index.js";
 
 //CONFIG
@@ -49,9 +51,10 @@ mongoose
     app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 
     //Manually add users to database one, comment out after use
-    // Transaction.insertMany(dataTransaction);
+    // User.insertMany(dataUser);
     // Product.insertMany(dataProduct);
     // ProductsStat.insertMany(dataProductStat);
-    // User.insertMany(dataUser);
+    // Transaction.insertMany(dataTransaction);
+    // OverallStat.insertMany(dataOverallStat);
   })
   .catch((error) => console.log(`${error} did not connect`));

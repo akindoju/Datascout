@@ -83,7 +83,9 @@ export const getGeography = async (req, res) => {
       if (!acc[countryISO3]) {
         acc[countryISO3] = 0;
       }
+
       acc[countryISO3]++;
+
       return acc;
     }, {});
 

@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-const Dashboard: FC = () => {
+const Dashboard = () => {
   return <div>Layout</div>;
 };
 

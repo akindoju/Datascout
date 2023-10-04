@@ -1,5 +1,5 @@
 import { Box, styled, useMediaQuery } from "@mui/material";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { NavBar } from "../../components/NavBar";
 import { Sidebar } from "../../components/Sidebar";
@@ -24,7 +24,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   marginLeft: isMobileView || open ? 0 : "-250px",
 }));
 
-const Layout: FC = () => {
+const Layout = () => {
   const isMobileView = useMediaQuery("(max-width: 600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const userId = useSelector((state: RootState) => state.global.userId);

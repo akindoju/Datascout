@@ -1,11 +1,10 @@
 import { Box, useTheme } from "@mui/material";
-import { FC } from "react";
 import Header from "../../components/Header";
 import { useGetCustomersQuery } from "../../redux/api";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { IThemeSettings } from "../../interfaces";
 
-const Customers: FC = () => {
+const Customers = () => {
   const theme: IThemeSettings = useTheme();
   const { data, isLoading } = useGetCustomersQuery();
 

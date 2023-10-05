@@ -1,6 +1,7 @@
 import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import Header from "../../components/Header";
 import { useState } from "react";
+import OverviewChart from "../../components/OverviewChart";
 
 const Overview = () => {
   const [view, setView] = useState<string>("units");
@@ -20,13 +21,14 @@ const Overview = () => {
             value={view}
             label="View"
             onChange={({ target }) => setView(target.value)}
+            size="small"
           >
             <MenuItem value="sales">Sales</MenuItem>
             <MenuItem value="units">Units</MenuItem>
           </Select>
         </FormControl>
 
-        {/* <OverviewChart view={view} /> */}
+        <OverviewChart view={view} />
       </Box>
     </Box>
   );

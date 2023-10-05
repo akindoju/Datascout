@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import Header from "../../components/Header";
 import { IThemeSettings } from "../../interfaces";
 import { useGetGeographyQuery } from "../../redux/api";
@@ -34,7 +34,6 @@ const Geography = () => {
               "#14204A",
             ]}
             theme={{
-              axis: {},
               tooltip: {
                 container: {
                   color: theme.palette.primary.main,
@@ -78,7 +77,7 @@ const Geography = () => {
             ]}
           />
         ) : (
-          <>Loading...</>
+          <Typography sx={{ m: "20px" }}>Loading...</Typography>
         )}
       </Box>
     </Box>

@@ -1,20 +1,21 @@
 import { useMemo } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { useTheme } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import { useGetSalesQuery } from "../../redux/api";
 import { IThemeSettings } from "../../interfaces";
 
 interface IProps {
-  isDashboard: boolean;
+  isDashboard?: boolean;
   view: string;
 }
 
-interface IReduce {
-  sales: number;
-  units: number;
+interface LineChartData {
+  id: string | number;
+  color: string;
+  data: { x: string | number | Date; y: string | number | Date }[];
 }
 
-const OverviewChart = ({ isDashboard = false, view }: IProps): JSX.Element => {
+const OverviewChart = ({ isDashboard = false, view }: IProps) => {
   const theme: IThemeSettings = useTheme();
   const { data, isLoading } = useGetSalesQuery();
 
@@ -22,12 +23,14 @@ const OverviewChart = ({ isDashboard = false, view }: IProps): JSX.Element => {
     if (!data) return [];
 
     const { monthlyData } = data;
-    const totalSalesLine = {
+
+    const totalSalesLine: LineChartData = {
       id: "totalSales",
       color: theme.palette.secondary.main,
       data: [],
     };
-    const totalUnitsLine = {
+
+    const totalUnitsLine: LineChartData = {
       id: "totalUnits",
       color: theme.palette.secondary[600],
       data: [],
@@ -35,20 +38,20 @@ const OverviewChart = ({ isDashboard = false, view }: IProps): JSX.Element => {
 
     Object.values(monthlyData).reduce(
       (acc, { month, totalSales, totalUnits }) => {
-        const curSales = acc.sales + totalSales;
-        const curUnits = acc.units + totalUnits;
+        const currentSales = acc.sales + totalSales;
+        const currentUnits = acc.units + totalUnits;
 
         totalSalesLine.data = [
           ...totalSalesLine.data,
-          { x: month, y: curSales },
+          { x: month, y: currentSales.toLocaleString() },
         ];
 
         totalUnitsLine.data = [
           ...totalUnitsLine.data,
-          { x: month, y: curUnits },
+          { x: month, y: currentUnits.toLocaleString() },
         ];
 
-        return { sales: curSales, units: curUnits };
+        return { sales: currentSales, units: currentUnits };
       },
       { sales: 0, units: 0 }
     );
@@ -56,7 +59,9 @@ const OverviewChart = ({ isDashboard = false, view }: IProps): JSX.Element => {
     return [[totalSalesLine], [totalUnitsLine]];
   }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (!data || isLoading) return "Loading...";
+  if (!data || isLoading) {
+    return <Typography sx={{ mt: "20px" }}>Loading...</Typography>;
+  }
 
   return (
     <ResponsiveLine
@@ -74,10 +79,6 @@ const OverviewChart = ({ isDashboard = false, view }: IProps): JSX.Element => {
             },
           },
           ticks: {
-            line: {
-              stroke: theme.palette.secondary[200],
-              strokeWidth: 1,
-            },
             text: {
               fill: theme.palette.secondary[200],
             },
@@ -91,6 +92,11 @@ const OverviewChart = ({ isDashboard = false, view }: IProps): JSX.Element => {
         tooltip: {
           container: {
             color: theme.palette.primary.main,
+          },
+        },
+        crosshair: {
+          line: {
+            stroke: theme.palette.secondary[700],
           },
         },
       }}
@@ -113,7 +119,6 @@ const OverviewChart = ({ isDashboard = false, view }: IProps): JSX.Element => {
           if (isDashboard) return v.slice(0, 3);
           return v;
         },
-        orient: "bottom",
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
@@ -122,7 +127,6 @@ const OverviewChart = ({ isDashboard = false, view }: IProps): JSX.Element => {
         legendPosition: "middle",
       }}
       axisLeft={{
-        orient: "left",
         tickValues: 5,
         tickSize: 5,
         tickPadding: 5,

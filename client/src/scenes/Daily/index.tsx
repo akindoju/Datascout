@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMemo, useState } from "react";
 import { IThemeSettings, LineChartData } from "../../interfaces";
+import "./styles/index.css";
 
 const Daily = () => {
   const theme: IThemeSettings = useTheme();
@@ -64,6 +65,7 @@ const Daily = () => {
               selectsStart
               startDate={startDate}
               endDate={endDate}
+              wrapperClassName="datePicker"
             />
           </Box>
 

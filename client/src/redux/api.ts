@@ -13,6 +13,13 @@ interface IDailyData {
   totalUnits: number;
 }
 
+interface ISalesByCategory {
+  shoes: number;
+  clothing: number;
+  accessories: number;
+  misc: number;
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_BASE_URL }),
   reducerPath: "adminApi",
@@ -50,7 +57,12 @@ export const api = createApi({
       providesTags: ["Geography"],
     }),
     getSales: build.query<
-      { monthlyData: IMonthlyData; dailyData: IDailyData },
+      {
+        monthlyData: IMonthlyData;
+        dailyData: IDailyData;
+        salesByCategory: ISalesByCategory;
+        yearlySalesTotal: number;
+      },
       void
     >({
       query: () => "sales/sales",

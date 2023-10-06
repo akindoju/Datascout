@@ -7,6 +7,12 @@ interface IMonthlyData {
   _id: string;
 }
 
+interface IDailyData {
+  date: string;
+  totalSales: number;
+  totalUnits: number;
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_BASE_URL }),
   reducerPath: "adminApi",
@@ -43,7 +49,10 @@ export const api = createApi({
       query: () => "client/geography",
       providesTags: ["Geography"],
     }),
-    getSales: build.query<{ monthlyData: IMonthlyData }, void>({
+    getSales: build.query<
+      { monthlyData: IMonthlyData; dailyData: IDailyData },
+      void
+    >({
       query: () => "sales/sales",
       providesTags: ["Sales"],
     }),

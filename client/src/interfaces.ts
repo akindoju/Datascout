@@ -62,3 +62,9 @@ export interface IThemeSettings {
     };
   };
 }
+
+export interface LineChartData {
+  id: string | number;
+  color?: string;
+  data: { x: string | number | Date; y: string | number | Date }[];
+}

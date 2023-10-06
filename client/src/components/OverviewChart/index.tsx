@@ -2,17 +2,11 @@ import { useMemo } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { Typography, useTheme } from "@mui/material";
 import { useGetSalesQuery } from "../../redux/api";
-import { IThemeSettings } from "../../interfaces";
+import { IThemeSettings, LineChartData } from "../../interfaces";
 
 interface IProps {
   isDashboard?: boolean;
   view: string;
-}
-
-interface LineChartData {
-  id: string | number;
-  color: string;
-  data: { x: string | number | Date; y: string | number | Date }[];
 }
 
 const OverviewChart = ({ isDashboard = false, view }: IProps) => {

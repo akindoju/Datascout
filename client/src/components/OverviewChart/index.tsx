@@ -19,13 +19,13 @@ const OverviewChart = ({ isDashboard = false, view }: IProps) => {
     const { monthlyData } = data;
 
     const totalSalesLine: LineChartData = {
-      id: "totalSales",
+      id: "Total Sales",
       color: theme.palette.secondary.main,
       data: [],
     };
 
     const totalUnitsLine: LineChartData = {
-      id: "totalUnits",
+      id: "Total Units",
       color: theme.palette.secondary[600],
       data: [],
     };

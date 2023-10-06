@@ -8,7 +8,7 @@ import { useMemo, useState } from "react";
 import { IThemeSettings, LineChartData } from "../../interfaces";
 import "./styles/index.css";
 
-const Daily = () => {
+const DailySales = () => {
   const theme: IThemeSettings = useTheme();
   const { data } = useGetSalesQuery();
 
@@ -21,12 +21,12 @@ const Daily = () => {
     const { dailyData } = data;
 
     const totalSalesLine: LineChartData = {
-      id: "totalSales",
+      id: "Total Sales",
       color: theme.palette.secondary.main,
       data: [],
     };
     const totalUnitsLine: LineChartData = {
-      id: "totalUnits",
+      id: "Total Units",
       color: theme.palette.secondary[600],
       data: [],
     };
@@ -189,4 +189,4 @@ const Daily = () => {
   );
 };
 
-export default Daily;
+export default DailySales;

@@ -67,7 +67,7 @@ export const NAV_ITEMS: NavItem[] = [
     icon: null,
   },
   {
-    text: "Admin",
+    text: "Admins",
     icon: <AdminPanelSettingsOutlined />,
   },
   {

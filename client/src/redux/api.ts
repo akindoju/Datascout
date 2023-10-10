@@ -20,6 +20,21 @@ interface ISalesByCategory {
   misc: number;
 }
 
+interface IGetSales {
+  monthlyData: IMonthlyData;
+  dailyData: IDailyData;
+  salesByCategory: ISalesByCategory;
+  yearlySalesTotal: number;
+}
+
+interface IGetDahsboard {
+  totalCustomers: number;
+  todayStats: { totalSales: number };
+  transactions: [];
+  thisMonthStats: { totalSales: number };
+  yearlySalesTotal: number;
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_APP_BASE_URL }),
   reducerPath: "adminApi",
@@ -32,6 +47,7 @@ export const api = createApi({
     "Sales",
     "Admins",
     "Performance",
+    "Dashboard",
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -58,15 +74,7 @@ export const api = createApi({
       query: () => "client/geography",
       providesTags: ["Geography"],
     }),
-    getSales: build.query<
-      {
-        monthlyData: IMonthlyData;
-        dailyData: IDailyData;
-        salesByCategory: ISalesByCategory;
-        yearlySalesTotal: number;
-      },
-      void
-    >({
+    getSales: build.query<IGetSales, void>({
       query: () => "sales/sales",
       providesTags: ["Sales"],
     }),
@@ -77,6 +85,10 @@ export const api = createApi({
     getUserPerformance: build.query({
       query: (id) => `management/performance/${id}`,
       providesTags: ["Performance"],
+    }),
+    getDashboard: build.query<IGetDahsboard, void>({
+      query: () => `general/dashboard`,
+      providesTags: ["Dashboard"],
     }),
   }),
 });
@@ -90,4 +102,5 @@ export const {
   useGetSalesQuery,
   useGetAdminsQuery,
   useGetUserPerformanceQuery,
+  useGetDashboardQuery,
 } = api;

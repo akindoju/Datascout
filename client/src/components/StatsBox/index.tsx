@@ -29,26 +29,29 @@ const StatsBox = ({ title, value, increase, description, icon }: IProps) => {
         <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
           {title}
         </Typography>
+
         {icon}
       </FlexBetween>
 
-      <Typography
-        variant="h3"
-        fontWeight="600"
-        sx={{ color: theme.palette.secondary[200] }}
-      >
-        {value}
-      </Typography>
       <FlexBetween gap="1rem">
         <Typography
-          variant="h5"
-          fontStyle="italic"
-          sx={{ color: theme.palette.secondary.light }}
+          variant="h3"
+          fontWeight="600"
+          sx={{ color: theme.palette.secondary[300] }}
         >
-          {increase}
+          {value?.toLocaleString()}
         </Typography>
-        <Typography>{description}</Typography>
+
+        <Typography
+          variant="h5"
+          sx={{ color: theme.palette.secondary.light }}
+          fontSize={"12px"}
+        >
+          (<span>{increase}</span>)
+        </Typography>
       </FlexBetween>
+
+      <Typography fontSize={"13px"}>{description}</Typography>
     </Box>
   );
 };

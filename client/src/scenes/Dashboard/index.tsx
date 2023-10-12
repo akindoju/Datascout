@@ -1,22 +1,10 @@
-import {
-  Box,
-  Button,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { IThemeSettings } from "../../interfaces";
 import { useGetDashboardQuery } from "../../redux/api";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { FlexBetween } from "../../components/FlexBetween";
 import Header from "../../components/Header";
-import {
-  DownloadOutlined,
-  Email,
-  PersonAdd,
-  PointOfSale,
-  Traffic,
-} from "@mui/icons-material";
+import { Email, PersonAdd, PointOfSale, Traffic } from "@mui/icons-material";
 import OverviewChart from "../../components/OverviewChart";
 import BreakdownChart from "../../components/BreakdownChart";
 import StatsBox from "../../components/StatsBox";
@@ -43,17 +31,17 @@ const Dashboard = () => {
       flex: 1,
     },
     {
-      field: "products",
-      headerName: "# of Products",
-      flex: 0.5,
-      sortable: false,
-      renderCell: (params) => params.value.length,
-    },
-    {
       field: "cost",
       headerName: "Cost",
-      flex: 1,
+      flex: 0.5,
       renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
+    },
+    {
+      field: "products",
+      headerName: "# of Products",
+      flex: 0.6,
+      sortable: false,
+      renderCell: (params) => params.value.length,
     },
   ];
 
@@ -62,7 +50,7 @@ const Dashboard = () => {
       <FlexBetween>
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
 
-        <Box>
+        {/* <Box>
           <Button
             sx={{
               backgroundColor: theme.palette.secondary.light,
@@ -75,7 +63,7 @@ const Dashboard = () => {
             <DownloadOutlined sx={{ mr: "10px" }} />
             Download Reports
           </Button>
-        </Box>
+        </Box> */}
       </FlexBetween>
 
       <Box
@@ -90,7 +78,7 @@ const Dashboard = () => {
       >
         {/* ROW 1 */}
         <StatsBox
-          title="Total Customers"
+          title="Customers"
           value={data && data.totalCustomers}
           increase="+14%"
           description="Since last month"
@@ -116,7 +104,7 @@ const Dashboard = () => {
           gridColumn="span 8"
           gridRow="span 2"
           bgcolor={theme.palette.background.alt}
-          p="1rem"
+          p="0.5rem 0"
           borderRadius="0.55rem"
         >
           <OverviewChart view="sales" isDashboard={true} />
@@ -202,8 +190,7 @@ const Dashboard = () => {
             fontSize="0.8rem"
             sx={{ color: theme.palette.secondary[200] }}
           >
-            Breakdown of real states and information via category for revenue
-            made for this year and total sales.
+            Yearly Revenue and Total Sales by Real Estate Categories
           </Typography>
         </Box>
       </Box>

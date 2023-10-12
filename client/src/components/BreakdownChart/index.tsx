@@ -17,7 +17,7 @@ const BreakdownChart = ({ isDashboard = false }: IProps) => {
 
   const formattedData = Object.entries(data.salesByCategory).map(
     ([category, sales]) => ({
-      id: category,
+      id: category[0].toUpperCase() + category.substring(1),
       label: category[0].toUpperCase() + category.substring(1),
       value: sales,
     })
@@ -45,6 +45,7 @@ const BreakdownChart = ({ isDashboard = false }: IProps) => {
             ? { top: 40, right: 80, bottom: 100, left: 50 }
             : { top: 40, right: 80, bottom: 80, left: 80 }
         }
+        colors={{ scheme: "nivo" }}
         sortByValue={true}
         innerRadius={0.45}
         activeOuterRadiusOffset={8}
@@ -67,11 +68,10 @@ const BreakdownChart = ({ isDashboard = false }: IProps) => {
             justify: false,
             translateX: isDashboard ? 20 : 0,
             translateY: isDashboard ? 50 : 56,
-            itemsSpacing: 20,
             itemWidth: 85,
             itemHeight: 18,
             itemTextColor: "#999",
-            itemDirection: "left-to-right",
+            itemDirection: "top-to-bottom",
             itemOpacity: 1,
             symbolSize: 18,
             symbolShape: "circle",

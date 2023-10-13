@@ -12,11 +12,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import {
-  SettingsOutlined,
-  ChevronLeft,
-  ChevronRightOutlined,
-} from "@mui/icons-material";
+import { ChevronLeft, ChevronRightOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlexBetween } from "../FlexBetween";
 import profile from "../../assets/profile.png";
@@ -196,12 +192,6 @@ export const Sidebar: FC<IProps> = ({
               </Typography>
             </Box>
           </Box>
-
-          <IconButton>
-            <SettingsOutlined
-              sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}
-            />
-          </IconButton>
         </Box>
       </Drawer>
     </Box>

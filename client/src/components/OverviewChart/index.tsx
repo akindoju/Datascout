@@ -59,7 +59,13 @@ const OverviewChart = ({ isDashboard = false, view }: IProps) => {
 
   return (
     <ResponsiveLine
-      data={view === "sales" ? totalSalesLine : totalUnitsLine}
+      data={
+        view === "sales" && totalSalesLine?.length
+          ? totalSalesLine
+          : view === "units" && totalUnitsLine?.length
+          ? totalUnitsLine
+          : []
+      }
       theme={{
         axis: {
           domain: {
@@ -105,7 +111,6 @@ const OverviewChart = ({ isDashboard = false, view }: IProps) => {
       }}
       yFormat=" >-.2f"
       curve="catmullRom"
-      enableArea={isDashboard}
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -143,7 +148,7 @@ const OverviewChart = ({ isDashboard = false, view }: IProps) => {
         !isDashboard
           ? [
               {
-                anchor: "bottom-right",
+                anchor: "top-right",
                 direction: "column",
                 justify: false,
                 translateX: 30,

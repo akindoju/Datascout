@@ -22,7 +22,7 @@ export interface IUser {
 }
 
 export interface IThemeSettings {
-  palette: {
+  palette?: {
     mode: "dark" | "light";
     primary: PaletteSettings;
     secondary: PaletteSettings;
@@ -33,7 +33,7 @@ export interface IThemeSettings {
       alt: string;
     };
   };
-  typography: {
+  typography?: {
     fontFamily: string;
     fontSize: number;
     h1: {

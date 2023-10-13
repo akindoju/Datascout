@@ -83,7 +83,7 @@ const DailySales = () => {
 
         {data ? (
           <ResponsiveLine
-            data={formattedData}
+            data={formattedData?.length ? formattedData : []}
             theme={{
               axis: {
                 domain: {

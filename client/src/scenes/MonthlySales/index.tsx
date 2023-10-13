@@ -49,7 +49,7 @@ const MothlySales = () => {
       <Box height="75vh">
         {data ? (
           <ResponsiveLine
-            data={formattedData}
+            data={formattedData?.length ? formattedData : []}
             theme={{
               axis: {
                 domain: {

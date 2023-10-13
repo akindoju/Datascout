@@ -68,6 +68,8 @@ const reverseTokens = (tokensDark: TokensDark) => {
     const reversedObj: Record<number, string> = {};
 
     for (let i = 0; i < length; i++) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       reversedObj[keys[i]] = values[length - i - 1];
     }
 

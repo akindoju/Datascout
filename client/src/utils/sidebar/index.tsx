@@ -47,16 +47,16 @@ export const NAV_ITEMS: NavItem[] = [
     icon: null,
   },
   {
-    text: "Overview",
-    icon: <PointOfSaleOutlined />,
-  },
-  {
     text: "Daily",
     icon: <TodayOutlined />,
   },
   {
     text: "Monthly",
     icon: <CalendarMonthOutlined />,
+  },
+  {
+    text: "Overview",
+    icon: <PointOfSaleOutlined />,
   },
   {
     text: "Breakdown",

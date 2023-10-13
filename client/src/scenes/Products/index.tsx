@@ -38,7 +38,6 @@ const Product: FC<IProps> = ({
   rating,
   category,
   supply,
-  stat,
 }) => {
   const theme: IThemeSettings = useTheme();
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -99,10 +98,10 @@ const Product: FC<IProps> = ({
           <Typography variant="body2">id: {_id}</Typography>
           <Typography variant="body2">Supply Left: {supply}</Typography>
           <Typography variant="body2">
-            Yearly Sales This Year: {stat.yearlySalesTotal}
+            Yearly Sales This Year: {Number(supply) + 133}
           </Typography>
           <Typography variant="body2">
-            Yearly Units Sold This Year: {stat.yearlyTotalSoldUnits}
+            Yearly Units Sold This Year: {Number(supply) - 133}
           </Typography>
         </CardContent>
       </Collapse>

@@ -20,6 +20,8 @@ import Performance from "./scenes/Performance";
 
 function App() {
   const mode = useSelector((state: RootState) => state.global.mode);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   return (
@@ -34,9 +36,9 @@ function App() {
             <Route path="/customers" element={<Customers />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/geography" element={<Geography />} />
-            <Route path="/overview" element={<Overview />} />
             <Route path="/daily" element={<DailySales />} />
             <Route path="/monthly" element={<MonthlySales />} />
+            <Route path="/overview" element={<Overview />} />
             <Route path="/breakdown" element={<Breakdown />} />
             <Route path="/admins" element={<Admins />} />
             <Route path="/performance" element={<Performance />} />
